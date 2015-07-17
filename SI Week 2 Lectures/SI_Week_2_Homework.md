@@ -13,8 +13,12 @@ A = \mbox{Accepted} \\
 B = \mbox{Revision requested} \\
 P(A) = .12 \\
 P(B) = .20 \\
-P(A ~|~ B) = .90 \\
-P(A \cap B) = P(A ~|~ B) * P(B) = 0.90 * 0.20 = 0.18
+P(A ~|~ B) = .90 \\ \\
+\begin{eqnarray*}
+P(A \cap B) & = & P(A ~|~ B) * P(B) \\
+& = & 0.90 * 0.20 \\
+& = & 0.18
+\end{eqnarray*}
 $$
 
 So, no, because it suggests that $P(A \cap B) > P(A)$.
@@ -51,7 +55,7 @@ Suppose 5% of housing projects have issues with asbestos. The sensitivity of a t
 - 100%
 
 $$
-A = \mbox{Prevalence of Asbestos} \\
+A = \mbox{Presence of Asbestos} \\
 + = \mbox{Positive Test} \\
 - = \mbox{Negative Test} \\
 P(+ ~|~ A) = .93 \\
@@ -59,10 +63,10 @@ P(- ~|~ A^C) = .88 \\
 P(A) = .05 \\ \\ \\
 \begin{eqnarray*}
 P(A^C ~|~ -)
-& = & \frac{P(A^C \cap -)}{P(A^C)} \\
+& = & \frac{P(A^C \cap -)}{P(-)} \\
 & = & \frac{P(- ~|~ A^C)P(A^C)}{P(- \cap A^C) + P(- \cap A)} \\
 & = & \frac{P(- ~|~ A^C)P(A^C)}{P(- ~|~ A^C)P(A^C) + P(- ~|~ A)P(A)} \\
-& = & \frac{P(- ~|~ A^C)(1 - P(A))}{P(- ~|~ A^C)(1 - P(A)) + (1 - P(+ ~|~ A))P(A)} \\
+& = & \frac{P(- ~|~ A^C)(1 - P(A^C))}{P(- ~|~ A^C)(1 - P(A^C)) + (1 - P(+ ~|~ A))P(A)} \\
 & = & \frac{.88 * (1 - .05)}{.88 * (1 - .05) + (1 - .93) * .05} \\
 & = & \frac{.88 * .95}{.88 * .95 + .07 * .05} \\
 & = & \frac{.836}{.836 + 0.0035} \\
@@ -75,7 +79,7 @@ $$
 
 Suppose that the number of web hits to a particular site are approximately normally distributed with a mean of 100 hits per day and a standard deviation of 10 hits per day.
 
-1. What number of web hits per day represents the number so that only 5% of days ahve more hits? Express your answer to 3 decimal places.
+1. What number of web hits per day represents the number so that only 5% of days have more hits? Express your answer to 3 decimal places.
 
 
 ```r
@@ -94,11 +98,11 @@ Suppose that the number of web hits to a particular site are approximately norma
 
 
 ```r
-round(qnorm(.95, mean = 100, sd = 100 / sqrt(50)), 3)
+round(qnorm(.95, mean = 100, sd = 10 / sqrt(50)), 3)
 ```
 
 ```
-## [1] 123.262
+## [1] 102.326
 ```
 
 ## Question 6

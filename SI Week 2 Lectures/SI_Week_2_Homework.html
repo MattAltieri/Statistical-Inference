@@ -77,8 +77,12 @@ A = \mbox{Accepted} \\
 B = \mbox{Revision requested} \\
 P(A) = .12 \\
 P(B) = .20 \\
-P(A ~|~ B) = .90 \\
-P(A \cap B) = P(A ~|~ B) * P(B) = 0.90 * 0.20 = 0.18
+P(A ~|~ B) = .90 \\ \\
+\begin{eqnarray*}
+P(A \cap B) &amp; = &amp; P(A ~|~ B) * P(B) \\
+&amp; = &amp; 0.90 * 0.20 \\
+&amp; = &amp; 0.18
+\end{eqnarray*}
 \]</span></p>
 <p>So, no, because it suggests that <span class="math">\(P(A \cap B) &gt; P(A)\)</span>.</p>
 <p><a href="Answer"><a href="https://www.youtube.com/watch?v=E4kE4M1J15s&amp;feature=youtu.be&amp;list=PLpl-gQkQivXhHOcVeU3bSJg78zaDYbP9L" class="uri">https://www.youtube.com/watch?v=E4kE4M1J15s&amp;feature=youtu.be&amp;list=PLpl-gQkQivXhHOcVeU3bSJg78zaDYbP9L</a></a></p>
@@ -107,7 +111,7 @@ P(A \cap B) = P(A ~|~ B) * P(B) = 0.90 * 0.20 = 0.18
 <li>100%</li>
 </ul>
 <p><span class="math">\[
-A = \mbox{Prevalence of Asbestos} \\
+A = \mbox{Presence of Asbestos} \\
 + = \mbox{Positive Test} \\
 - = \mbox{Negative Test} \\
 P(+ ~|~ A) = .93 \\
@@ -115,10 +119,10 @@ P(- ~|~ A^C) = .88 \\
 P(A) = .05 \\ \\ \\
 \begin{eqnarray*}
 P(A^C ~|~ -)
-&amp; = &amp; \frac{P(A^C \cap -)}{P(A^C)} \\
+&amp; = &amp; \frac{P(A^C \cap -)}{P(-)} \\
 &amp; = &amp; \frac{P(- ~|~ A^C)P(A^C)}{P(- \cap A^C) + P(- \cap A)} \\
 &amp; = &amp; \frac{P(- ~|~ A^C)P(A^C)}{P(- ~|~ A^C)P(A^C) + P(- ~|~ A)P(A)} \\
-&amp; = &amp; \frac{P(- ~|~ A^C)(1 - P(A))}{P(- ~|~ A^C)(1 - P(A)) + (1 - P(+ ~|~ A))P(A)} \\
+&amp; = &amp; \frac{P(- ~|~ A^C)(1 - P(A^C))}{P(- ~|~ A^C)(1 - P(A^C)) + (1 - P(+ ~|~ A))P(A)} \\
 &amp; = &amp; \frac{.88 * (1 - .05)}{.88 * (1 - .05) + (1 - .93) * .05} \\
 &amp; = &amp; \frac{.88 * .95}{.88 * .95 + .07 * .05} \\
 &amp; = &amp; \frac{.836}{.836 + 0.0035} \\
@@ -131,7 +135,7 @@ P(A^C ~|~ -)
 <h2>Question 4</h2>
 <p>Suppose that the number of web hits to a particular site are approximately normally distributed with a mean of 100 hits per day and a standard deviation of 10 hits per day.</p>
 <ol style="list-style-type: decimal">
-<li>What number of web hits per day represents the number so that only 5% of days ahve more hits? Express your answer to 3 decimal places.</li>
+<li>What number of web hits per day represents the number so that only 5% of days have more hits? Express your answer to 3 decimal places.</li>
 </ol>
 <pre class="r"><code>round(qnorm(.95, mean=100, sd=10), 3)</code></pre>
 <pre><code>## [1] 116.449</code></pre>
@@ -142,8 +146,8 @@ P(A^C ~|~ -)
 <ol style="list-style-type: decimal">
 <li>Imagine taking a random sample of 50 days. What number of web hits would be the point so that only 5% of averages of 50 days of web traffic have more hits? Express your answer to 3 decimal places.</li>
 </ol>
-<pre class="r"><code>round(qnorm(.95, mean = 100, sd = 100 / sqrt(50)), 3)</code></pre>
-<pre><code>## [1] 123.262</code></pre>
+<pre class="r"><code>round(qnorm(.95, mean = 100, sd = 10 / sqrt(50)), 3)</code></pre>
+<pre><code>## [1] 102.326</code></pre>
 </div>
 <div id="question-6" class="section level2">
 <h2>Question 6</h2>
