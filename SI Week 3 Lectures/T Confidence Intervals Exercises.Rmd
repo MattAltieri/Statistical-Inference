@@ -1,0 +1,84 @@
+---
+title: "T Confidence Intervals - Exercises"
+output:
+    html_document:
+        keep_md: true
+---
+
+## Question 1
+
+For iid Gaussian data, the statistic $\frac{\bar X - \mu}{s / \sqrt n}$ must follow a:
+
+- Z distribution
+- t distribution **<-- ANSWER**
+
+## Question 2
+
+Paired differences T confidence intervals are useful when:
+
+- Pairs of observations are linked, such as when there is subject level matching or in a study with baseline and follow-up measurements on all participants **<-- ANSWER**
+- When there was randomization of a treatment between two independent groups
+
+## Question 3
+
+The assumption that the variances are equal for the independent group T interval means that:
+
+- The sample variances have to be nearly identical
+- The population variances are identical, but the sample variances may be different **<-- ANSWER**
+
+## Question 4
+
+Load the data set `mtcars` in the `datasets` R package. Calculate a 95% confidence interval to the nearest MPG for the variable `mpg`
+
+```{r}
+library(datasets)
+data(mtcars)
+t.test(mtcars$mpg)$conf
+```
+
+## Question 5
+
+Suppose that standard deviation of 9 paired differences is 1. What value would the average difference have to be so that the lower end point of a 95% student's t confidence interval touches 0
+
+$$
+n = 9 \\
+sd = 1 \\ \\
+\begin{eqnarray*}
+\bar Y_d - t_{.975} \times \frac{sd}{\sqrt n} & = & 0 \\
+\bar Y_d - t_{.975} \times \frac{1}{3} & = & 0 \\
+\bar Y_d & = & t_{.975} \times \frac{1}{3} \\
+\bar Y_d & = & \frac{t_{.975}}{3}
+\end{eqnarray*}
+$$
+
+```{r}
+qt(.975, 8) / 3
+```
+
+## Question 6
+
+An independent group Student's T interval is used instead of a paired T interval when:
+
+- The observations are paired between the groups
+- The observations between the groups are naturally assumed to be statistically independent **<-- ANSWER**
+- As long as you do it correctly, either is fine
+- More details are needed to answer this question
+
+## Question 7
+
+Consider the `mtcars` dataset. Construct a 95% T interval for MPG comparing 4 to 6 cylinder cars (subtracting in the order of 4 - 6). Assume a constant variance
+
+```{r}
+library(datasets)
+data(mtcars)
+sub_mtcars <- subset(mtcars, cyl %in% c(4, 6))
+t.test(mpg ~ cyl, paired=F, var.equal=T, data=sub_mtcars)$conf
+```
+
+## Question 8
+
+## Question 9
+
+## Question 10
+
+## Question 11
