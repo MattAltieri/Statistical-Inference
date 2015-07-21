@@ -77,8 +77,22 @@ t.test(mpg ~ cyl, paired=F, var.equal=T, data=sub_mtcars)$conf
 
 ## Question 8
 
+If someone put a gun to your head and said "Your confidence interval must contain what it's estimating or I'll pull the trigger", what would be the smart thing to do?
+
+- Make your interval as wide as possible **<-- Statistical ANSWER**
+- Make your interval as small as possible
+- Call the authorities **<-- Real World ANSWER**
+
 ## Question 9
+
+Refer back to comparing MPG for 4 versus 6 cylinders. What do you conclude
+
+- The interval is above zero, suggesting 6 is better than 4 in terms of MPG
+- The interval is above zero, suggesting 4 is better than 6 in terms of MPG **<-- ANSWER**
+- The interval does not tell you anything about the hypothesis test; you have to do the test
+- The interval contains 0 suggesting no difference
 
 ## Question 10
 
-## Question 11
+Suppose that 18 obese subjects were randomized, 9 each, to a new diet pill and a placebo. Subjects body mass indices (BMIs) were measured at a baseline and again after having received the treatment or placebo for four weeks. The average difference from follow-up to the baseline (followup - baseline) was 3 kg/m2 for the treated group and 1 kg/m2 for the placebo group. The corresponding standard deviations of the differences was 1.5 kg/m2 for the treadment group and 1.8 kg/m2 for the placebo group. The study aims to answer whether the change in BMI over the four week period appears to differ between the treated and placebo groups. What is the pooled variance estimate
+
