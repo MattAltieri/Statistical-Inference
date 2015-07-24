@@ -1,0 +1,133 @@
+---
+title: "SI Week 3 Homework"
+output:
+    html_document:
+        keep_md: true
+---
+
+## Question 1
+
+Load the dataset `mtcars` in the `datasets` R package. Calculate a 95% confidence interval to the nearest MPG for the variable `mpg`.
+
+What is the confidence interval?
+
+```{r, warning=FALSE, message=FALSE}
+library(datasets)
+data(mtcars)
+t.test(mtcars$mpg)
+```
+
+**ANSWER:** 17.91768    22.26357
+
+## Question 2
+
+Suppose that standard deviation of 9 paired differences is 1. What value would the average difference have to be so that the lower endpoint of a 95% students t confidence interval touches zero?
+
+$$
+n = 9 \\
+df = n - 1 = 8 \\
+s = 1 \\
+t = ?
+$$
+
+```{r}
+n <- 9
+s <- 1
+df <- n - 1
+qt(.975, df)
+```
+
+$$
+t = 2.306004 \\ \\
+\begin{eqnarray*}
+0 & = & \bar X - t_{.975,df} \times \frac{s}{\sqrt n} \\ \\
+\bar X
+& = & t_{.975,df} \times \frac{s}{\sqrt n} \\ \\
+& = & 2.306004 \times \frac{1}{\sqrt 9}
+\end{eqnarray*}
+$$
+
+```{r}
+n <- 9
+df = n - 1
+s = 1
+se = s / sqrt(n)
+round(qt(.975, df=df) * se, 2)
+```
+
+**ANSWER:** 0.77
+
+## Question 3
+
+An independent group Student's T interval is used instead of a paired T inverval when:
+
+- The observations are paired between groups
+- The observations between the groups are naturally assumed to be statistically independent **<-- ANSWER**
+- As long as you do it correctly, either is fine
+- More details are needed to answer the question
+
+## Question 4
+
+Consider the `mtcars` dataset. Construct a 95% T interval for MPG compairing 4 to 6 cylinder cars (subtracting in the order of 4 - 6) assume a constant variance. Round to 1 decimal place
+
+```{r}
+mpg4 <- mtcars[which(mtcars$cyl == 4),"mpg"]
+mpg6 <- mtcars[which(mtcars$cyl == 6),"mpg"]
+round(t.test(mpg4, mpg6, var.equal=T)$conf, 1)
+```
+
+## Question 5
+
+If someone put a gun to your head and said "Your confidence interval must contain what it's estimating or I'll pull the trigger", what would be the smart thing to do?
+
+- Make your interval as wide as possible **<-- ANSWER**
+- Make your interval as small as possible
+0 Call the authorities
+
+## Question 6
+
+Refer back to compairing MPG for 4 versus 6 cylinders. What do you conclude?
+
+- The interval is above zero, suggesting 6 is better than 4 in terms of MPG
+- The interval is above zero, suggesting 4 is better than 6 in terms of MPG **<-- ANSWER**
+- The interval does not tell you anything about the hypothesis test; you have to do the test
+- The interval contains 0 suggesting no difference
+
+## Question 7
+
+Suppose that 18 obese subjects were randomized, 9 each, to a new diet pill and a placebo. Subjects' body mass indices (BMIs) were measured at a baseline and again after having received the treatment or placebo for four weeks. The average difference from followup to the baseline (followup - baseline) was 3 kg/m$^2$ for the treated group and 1 kg/m$^2$ for the placebo group. The corresponding standard deviations of the differences was 1.5 kg/m$^2$ for the treatment group and 1.8 kg/m$^2$ for the placebo group. The study aims to answer whether the change in BMI over the four week period appear to differ between the treated and placebo groups
+
+What is the pooled variance estimate to two decimal places?
+
+```{r}
+test.mn <- 3
+test.sd <- 1.5
+test.n <- 9
+test.df <- test.n - 1
+control.mn <- 1
+control.sd <- 1.8
+control.n <- 9
+control.df <- control.n - 1
+sp <- (test.df * test.sd^2 + control.df * control.sd^2)/(test.df + control.df)
+round(sp, 2)
+```
+
+**ANSWER:** 2.75
+
+## Question 8
+
+For binomial data the maximum likelihood estimate for the probability of a success is
+
+- The proportion of successes **<-- ANSWER**
+- The proportion of failures
+- A shrunken version of the proportion of successes
+- A shrunken version of the proportion of failures
+
+## Question 9
+
+Bayesian inference requires
+
+- A type I error rate
+- Setting your confidence level
+- Assigning a prior probability distribution **<-- ANSWER**
+- Evaluating frequency error rates
