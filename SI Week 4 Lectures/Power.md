@@ -1,9 +1,4 @@
----
-title: "Power"
-output:
-    html_document:
-        keep_md: true
----
+# Power
 
 ## Power
 
@@ -33,7 +28,8 @@ $$
 - Under $H_\alpha : \bar X\sim N(\mu_\alpha,\sigma&2/n)$
 - So we want
 
-```{r, eval=FALSE}
+
+```r
 alpha <- 0.05
 z <- qnorm(1 - alpha)
 pnorm(mu0 + z * sigma/sqrt(n), mean=mua, sd=sigma/sqrt(n), lower.tail=F)
@@ -42,7 +38,8 @@ pnorm(mu0 + z * sigma/sqrt(n), mean=mua, sd=sigma/sqrt(n), lower.tail=F)
 ## Example continued
 - $\mu_\alpha = 32, \mu_0 = 30, n = 15, \sigma = 4$
 
-```{r}
+
+```r
 mu0 <- 30
 mua <- 32
 sigma <- 4
@@ -50,31 +47,28 @@ n <- 16
 alpha <- 0.05
 z <- qnorm(1 - alpha)
 pnorm(mu0 + z * sigma/sqrt(n), mean=mu0, sd=sigma/sqrt(n), lower.tail=F)
+```
+
+```
+## [1] 0.05
+```
+
+```r
 pnorm(mu0 + z * sigma/sqrt(n), mean=mua, sd=sigma/sqrt(n), lower.tail=F)
+```
+
+```
+## [1] 0.63876
 ```
 
 ## Plotting the power of the curve
 
-```{r, fig.align='center', fig.height=6, fig.width=12, echo=FALSE, message=FALSE, warning=FALSE}
-library(ggplot2)
-nseq <- c(8, 16, 32, 64, 128)
-mua <- seq(30, 35, by=0.1)
-z <- qnorm(.95)
-power <- sapply(nseq, function(n)
-    pnorm(mu0 + z * sigma/sqrt(n), mean=mua, sd=sigma/sqrt(n), lower.tail=F)
-)
-colnames(power) <- paste("n", nseq, sep="")
-d <- data.frame(mua, power)
-library(reshape2)
-d2 <- melt(d, id.vars="mua")
-names(d2) <- c("mua", "n", "power")
-ggplot(d2, aes(x=mua, y=power, col=n)) +
-    geom_line(size=2)
-```
+<img src="Power_files/figure-html/unnamed-chunk-3-1.png" title="" alt="" style="display: block; margin: auto;" />
 
 ## Graphical Depiction of Power
 
-```{r, eval=FALSE}
+
+```r
 library(manipulate)
 mu0 <- 30
 myplot <- function(sigma, mua, n, alpha) {
@@ -130,11 +124,51 @@ $$
     
 ## Example
     
-```{r}
+
+```r
 power.t.test(n=16, delta=2/4, sd=1, type="one.sample", alt="one.sided")$power
+```
+
+```
+## [1] 0.6040329
+```
+
+```r
 power.t.test(n=16, delta=2, sd=4, type="one.sample", alt="one.sided")$power
+```
+
+```
+## [1] 0.6040329
+```
+
+```r
 power.t.test(n=16, delta=100, sd=200, type="one.sample", alt="one.sided")$power
+```
+
+```
+## [1] 0.6040329
+```
+
+```r
 power.t.test(power=0.8, delta=2/4, sd=1, type="one.sample", alt="one.sided")$n
+```
+
+```
+## [1] 26.13751
+```
+
+```r
 power.t.test(power=0.8, delta=2, sd=4, type="one.sample", alt="one.sided")$n
+```
+
+```
+## [1] 26.13751
+```
+
+```r
 power.t.test(power=0.8, delta=100, sd=200, type="one.sample", alt="one.sided")$n
+```
+
+```
+## [1] 26.13751
 ```
