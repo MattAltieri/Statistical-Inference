@@ -154,7 +154,7 @@ hist(medians)
 - Better precentile bootstrap confidence intervals correct for bias
     - Recommended: Bias corrected and accelerated interval (BCA Interval)
     - Take the resamples and pass it through the function in the `bootstrap` package
-- There are lots of variations on bootstrap procedures; the book "An Introduction to the Bootstrap" by Efron and Tibshirani is a great place to start for both bootstrap and jackknife information
+- There are lots of variations on bootstrap procedures; the book [An Introduction to the Bootstrap](http://www.crcpress.com/product/isbn/9780412042317) by Efron and Tibshirani is a great place to start for both bootstrap and jackknife information
 
 ## Group comparisons
 
