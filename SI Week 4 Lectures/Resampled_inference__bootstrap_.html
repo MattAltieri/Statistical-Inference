@@ -213,7 +213,11 @@ sd(medians)</code></pre>
 <h2>Notes on the bootstrap</h2>
 <ul>
 <li>The bootstrap is non-parametric</li>
-<li>Better precentile bootstrap confidence intervals correct for bias</li>
+<li>Better precentile bootstrap confidence intervals correct for bias
+<ul>
+<li>Recommended: Bias corrected and accelerated interval (BCA Interval)</li>
+<li>Take the resamples and pass it through the function in the <code>bootstrap</code> package</li>
+</ul></li>
 <li>There are lots of variations on bootstrap procedures; the book “An Introduction to the Bootstrap” by Efron and Tibshirani is a great place to start for both bootstrap and jackknife information</li>
 </ul>
 </div>
