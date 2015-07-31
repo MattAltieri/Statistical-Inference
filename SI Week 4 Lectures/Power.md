@@ -25,7 +25,7 @@ $$
 - We reject if $\frac{\bar X-20}{\sigma/\sqrt n} > z_{1-\alpha}$
     - Equivalently if $\bar X > 30 + Z_{1-\alpha}\frac{\sigma}{\sqrt n}$
 - Under $H_0 : \bar X\sim N(\mu_0,\sigma^2/n)$
-- Under $H_\alpha : \bar X\sim N(\mu_\alpha,\sigma&2/n)$
+- Under $H_\alpha : \bar X\sim N(\mu_\alpha,\sigma^2/n)$
 - So we want
 
 
