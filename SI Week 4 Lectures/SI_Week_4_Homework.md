@@ -241,16 +241,124 @@ $$
 
 
 ```r
-## Estimate w/ t test
-ceiling(power.t.test(power=.8, delta=.01, sd=.04, type="one.sample", alt="one.sided")$n)
+for (i in 1:1000) {
+    n <- i
+    pwr <- pnorm(0.0658 / sqrt(n), mean=0.01, sd=0.04/sqrt(n), lower.tail=F)
+    if (pwr >= .8) break
+}
+n
 ```
 
 ```
-## [1] 101
+## [1] 99
+```
+
+**ANSWER:** 99
+
+## Question 10
+
+In a court of law, all things being equal, if via policy you require a lower standard of evidence to convict people then
+
+- Less guilty people will be convicted
+- More innocent people will be convicted **<-- ANSWER**
+- More innocent people will be acquitted
+
+## Question 11
+
+Consider the `mtcars` datasete
+
+1. Give the $p$-value for a $t$-test comparing MPG for 6 and 8 cylinder cars assuming equal variance, as a proportion to 3 decimal places
+
+
+```r
+library(datasets)
+data(mtcars)
+mt <- mtcars
+mpg6 <- mt[which(mt$cyl == 6),"mpg"]
+mpg8 <- mt[which(mt$cyl == 8),"mpg"]
+tt <- t.test(mpg6, mpg8, var.equal=T)
+round(tt$p.value, 3)
+```
+
+```
+## [1] 0
+```
+
+**ANSWER:** 0.000
+
+2. Give the associated $p$-value for a $Z$-test
+
+
+```r
+# You can cheat this by taking t from the t test and using it as the test statistic in our z test
+round(2 * pnorm(tt$statistic, lower.tail=F), 3)
+```
+
+```
+## t 
+## 0
 ```
 
 ```r
-## 101. Now get precise w/ a Z test
+# Or to calculate it by hand
+mn6 <- mean(mpg6)
+mn8 <- mean(mpg8)
+s6 <- sd(mpg6)
+s8 <- sd(mpg8)
+n6 <- length(mpg6)
+n8 <- length(mpg8)
+sp <- sqrt(((n6 - 1) * s6^2 + (n8 - 1) * s8^2) / (n6 + n8 - 2))
+ts <- (mn6 - mn8) / (sp * sqrt(1/n6 + 1/n8))
+round(2 * pnorm(ts, lower.tail=F), 3)
 ```
 
-**ANSWER:** 
+```
+## [1] 0
+```
+
+**ANSWER:** 0.000
+
+3. Give the common standard deviation estimate for MPG across cylinders to 3 decimal places
+
+
+```r
+round(sp, 3)
+```
+
+```
+## [1] 2.27
+```
+
+**ANSWER:** 1.507
+
+4. Would the $t$-test reject at the two-sided 0.05 level?
+
+
+```r
+tt
+```
+
+```
+## 
+## 	Two Sample t-test
+## 
+## data:  mpg6 and mpg8
+## t = 4.419, df = 19, p-value = 0.0002947
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  2.443809 6.841905
+## sample estimates:
+## mean of x mean of y 
+##  19.74286  15.10000
+```
+
+**ANSWER:** Yes
+
+## Question 12
+
+The Bonferonni correction controls this
+
+- False discovery rate
+- The family-wise error rate **<-- ANSWER**
+- The rate of true rejections
+- The number of true rejections

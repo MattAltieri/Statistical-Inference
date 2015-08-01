@@ -252,11 +252,90 @@ Z_{1-\alpha} = 1.645 \\
 &amp; &gt; &amp; 0.0658 * \frac{1}{\sqrt n}
 \end{eqnarray*}
 \]</span></p>
-<pre class="r"><code>## Estimate w/ t test
-ceiling(power.t.test(power=.8, delta=.01, sd=.04, type=&quot;one.sample&quot;, alt=&quot;one.sided&quot;)$n)</code></pre>
-<pre><code>## [1] 101</code></pre>
-<pre class="r"><code>## 101. Now get precise w/ a Z test</code></pre>
-<p><strong>ANSWER:</strong></p>
+<pre class="r"><code>for (i in 1:1000) {
+    n &lt;- i
+    pwr &lt;- pnorm(0.0658 / sqrt(n), mean=0.01, sd=0.04/sqrt(n), lower.tail=F)
+    if (pwr &gt;= .8) break
+}
+n</code></pre>
+<pre><code>## [1] 99</code></pre>
+<p><strong>ANSWER:</strong> 99</p>
+</div>
+<div id="question-10" class="section level2">
+<h2>Question 10</h2>
+<p>In a court of law, all things being equal, if via policy you require a lower standard of evidence to convict people then</p>
+<ul>
+<li>Less guilty people will be convicted</li>
+<li>More innocent people will be convicted <strong>&lt;– ANSWER</strong></li>
+<li>More innocent people will be acquitted</li>
+</ul>
+</div>
+<div id="question-11" class="section level2">
+<h2>Question 11</h2>
+<p>Consider the <code>mtcars</code> datasete</p>
+<ol style="list-style-type: decimal">
+<li>Give the <span class="math inline">\(p\)</span>-value for a <span class="math inline">\(t\)</span>-test comparing MPG for 6 and 8 cylinder cars assuming equal variance, as a proportion to 3 decimal places</li>
+</ol>
+<pre class="r"><code>library(datasets)
+data(mtcars)
+mt &lt;- mtcars
+mpg6 &lt;- mt[which(mt$cyl == 6),&quot;mpg&quot;]
+mpg8 &lt;- mt[which(mt$cyl == 8),&quot;mpg&quot;]
+tt &lt;- t.test(mpg6, mpg8, var.equal=T)
+round(tt$p.value, 3)</code></pre>
+<pre><code>## [1] 0</code></pre>
+<p><strong>ANSWER:</strong> 0.000</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Give the associated <span class="math inline">\(p\)</span>-value for a <span class="math inline">\(Z\)</span>-test</li>
+</ol>
+<pre class="r"><code># You can cheat this by taking t from the t test and using it as the test statistic in our z test
+round(2 * pnorm(tt$statistic, lower.tail=F), 3)</code></pre>
+<pre><code>## t 
+## 0</code></pre>
+<pre class="r"><code># Or to calculate it by hand
+mn6 &lt;- mean(mpg6)
+mn8 &lt;- mean(mpg8)
+s6 &lt;- sd(mpg6)
+s8 &lt;- sd(mpg8)
+n6 &lt;- length(mpg6)
+n8 &lt;- length(mpg8)
+sp &lt;- sqrt(((n6 - 1) * s6^2 + (n8 - 1) * s8^2) / (n6 + n8 - 2))
+ts &lt;- (mn6 - mn8) / (sp * sqrt(1/n6 + 1/n8))
+round(2 * pnorm(ts, lower.tail=F), 3)</code></pre>
+<pre><code>## [1] 0</code></pre>
+<p><strong>ANSWER:</strong> 0.000</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Give the common standard deviation estimate for MPG across cylinders to 3 decimal places</li>
+</ol>
+<pre class="r"><code>round(sp, 3)</code></pre>
+<pre><code>## [1] 2.27</code></pre>
+<p><strong>ANSWER:</strong> 1.507</p>
+<ol start="4" style="list-style-type: decimal">
+<li>Would the <span class="math inline">\(t\)</span>-test reject at the two-sided 0.05 level?</li>
+</ol>
+<pre class="r"><code>tt</code></pre>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  mpg6 and mpg8
+## t = 4.419, df = 19, p-value = 0.0002947
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  2.443809 6.841905
+## sample estimates:
+## mean of x mean of y 
+##  19.74286  15.10000</code></pre>
+<p><strong>ANSWER:</strong> Yes</p>
+</div>
+<div id="question-12" class="section level2">
+<h2>Question 12</h2>
+<p>The Bonferonni correction controls this</p>
+<ul>
+<li>False discovery rate</li>
+<li>The family-wise error rate <strong>&lt;– ANSWER</strong></li>
+<li>The rate of true rejections</li>
+<li>The number of true rejections</li>
+</ul>
 </div>
 
 
